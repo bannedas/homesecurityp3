@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "307538388442",
+    "firebase_url": "https://home-security-p3.firebaseio.com",
+    "project_id": "home-security-p3",
+    "storage_bucket": "home-security-p3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307538388442:android:fe7f16d045895a1f444ce3",
+        "android_client_info": {
+          "package_name": "dk.boonga.homesecurityp3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307538388442-6vqvog5r2206mk00v5pstvls8cvcbg5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0WPYv5jbQg84r3RGfJc-Ewy3YfNsC9j0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307538388442-6vqvog5r2206mk00v5pstvls8cvcbg5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
