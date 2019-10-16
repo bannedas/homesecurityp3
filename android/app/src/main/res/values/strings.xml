@@ -3,4 +3,21 @@
     <string name="title_home">Home</string>
     <string name="title_settings">Settings</string>
     <string name="title_profile">Profile</string>
+
+    <!--Buttons and edit text fields from Login Activity-->
+    <string name="edit_text_email">Email</string>
+    <string name="edit_text_password">Password</string>
+    <string name="text_view_forgot_password">FORGOT PASSWORD?</string>
+    <string name="text_view_clickable_sign_up">SIGN UP FOR A FREE ACCOUNT HERE</string>
+    <string name="text_view_have_no_user">In order to use this app, you need to \n sign in. Dont have an account?</string>
+    <string name="button_login">Login</string>
+    <string name="button_sign_up">Sign up</string>
+
+    <!--Buttons and edit text fields from Sign up Activity-->
+    <string name="edit_text_password_confirm">Enter Password Again</string>
+    <string name="edit_text_first_name">First name</string>
+    <string name="edit_text_last_name">Last name</string>
+    <string name="button_login_info">Already have an account? Login</string>
+    <string name="text_view_sign_up_info">In order to use this app, you need to \n sign up. Fill out the form below.</string>
+
 </resources>

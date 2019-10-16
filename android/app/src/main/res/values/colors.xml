@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <color name="colorPrimary">#414288</color>
-    <color name="colorPrimaryDark">#682D63</color>
-    <color name="colorAccent">#5FB49C</color>
-
-    <color name="white">#ffffff</color>
+    <color name="colorPrimary">#FF3D7F</color>
+    <color name="colorPrimaryDark">#0E0D23</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="whitesmoke">#F4F4F4</color>
+    <color name="frenchrose">#FF3D7F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="lapislazuli">#3b5998</color>
+    <color name="onyx">#0E0D23</color>
+    <color name="darkjunglegreen">#231f20</color>
+    <color name="manatee">#9B9B9B</color>
     <color name="black">#000000</color>
+    <color name="black_87">#DE000000</color>
+    <color name="uared">#d70050</color>
+    <color name="isabelline">#efefef</color>
+    <color name="onyx_1">#101010</color>
+    <color name="snow">#fafafa</color>
+    <color name="darkgray">#b0b0b0</color>
+    <color name="pastelblue">#B9CAD2</color>
+    <color name="black_1">#060606</color>
+    <color name="radicalred">#EF4261</color>
+    <color name="dimgray">#606060</color>
+    <color name="trolleygrey">#818181</color>
+    <color name="outerspace">#4a4a4a</color>
+    <color name="timberwolf">#d8d8d8</color>
+    <color name="rose">#FF006F</color>
+    <color name="color_000000">#000000</color>
+    <color name="color_4a4a4a">#4A4A4A</color>
+    <color name="ash_grey">#B4B4B4</color>
 </resources>
 
