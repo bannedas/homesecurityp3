@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "LoginActivity";
 
     FirebaseAuth mAuth;
-    CallbackManager mCallbackManager;
 
     EditText mLoginEditTextEmail, mLoginEditTextPassword;
     TextView mSignUpTextView;
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        AppEventsLogger.activateApp(this);
         mAuth = FirebaseAuth.getInstance();
 
         mLoginEditTextEmail = findViewById(R.id.editTextEmailId);
@@ -134,13 +132,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /*
