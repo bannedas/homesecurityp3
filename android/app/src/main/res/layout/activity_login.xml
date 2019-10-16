@@ -130,24 +130,25 @@
 
     <TextView
         android:id="@+id/textViewSignUpId"
-        android:layout_width="237dp"
-        android:layout_height="24dp"
+        android:layout_width="287dp"
+        android:layout_height="52dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:duplicateParentState="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:fontFamily="@font/roboto"
         android:onClick="onClick"
         android:text="@string/text_view_clickable_sign_up"
+        android:textAlignment="center"
         android:textColor="@color/com_facebook_button_background_color_selected"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.369" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDontHaveAnAccountId"
+        app:layout_constraintVertical_bias="0.019" />
 </android.support.constraint.ConstraintLayout>
