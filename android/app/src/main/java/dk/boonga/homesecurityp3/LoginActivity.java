@@ -1,10 +1,14 @@
 package dk.boonga.homesecurityp3;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -13,11 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.security.MessageDigest;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -34,12 +41,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        AppEventsLogger.activateApp(this);
+        mAuth = FirebaseAuth.getInstance();
+
         mLoginEditTextEmail = findViewById(R.id.editTextEmailId);
         mLoginEditTextPassword = findViewById(R.id.editTextPasswordId);
         mSignUpTextView = findViewById(R.id.textViewSignUpId);
 
         findViewById(R.id.textViewSignUpId).setOnClickListener(this);
         findViewById(R.id.buttonLoginId).setOnClickListener(this);
+
+        printHashKey(getApplicationContext());
+    }
+    public static void printHashKey(Context context) {
+        try {
+            final PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                final MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                final String hashKey = new String(Base64.encode(md.digest(), 0));
+                Log.i("AppLog", "key:" + hashKey + "=");
+            }
+        } catch (Exception e) {
+            Log.e("AppLog", "error:", e);
+        }
     }
     /*
        This method is used to login the user
@@ -130,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, SignUpActivity.class),
                         ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 break;
-            //When button Login is pressed, call the method mergeFacebookToEmail
+
             case R.id.buttonLoginId:
                 userLogin();
                 break;
