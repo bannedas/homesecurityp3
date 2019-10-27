@@ -29,7 +29,7 @@ public class AdapterRooms extends RecyclerView.Adapter<AdapterRooms.myViewHolder
     List<room> mData;
     private static final String TAG = "adapter_event_cards";
 
-    public AdapterRooms(Context mContext, List<room> mData) {
+    public AdapterRooms(fragment_all_rooms mContext, List<room> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }

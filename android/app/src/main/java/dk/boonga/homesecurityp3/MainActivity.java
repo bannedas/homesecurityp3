@@ -2,6 +2,8 @@ package dk.boonga.homesecurityp3;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
@@ -18,9 +20,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainScreenActivity";
 
-    List<room> mListRoom;
 
-    RecyclerView recyclerViewRooms;
+
 
     private TextView mTextMessage;
 
@@ -29,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     //mTextMessage.setText(R.string.title_home);
-                    updateRoomList();
+                    fragment = new fragment_all_rooms();
+                    loadFragment(fragment,R.id.fragment_container_main);
                     return true;
                 case R.id.navigation_settings:
                     //mTextMessage.setText(R.string.title_settings);
@@ -45,28 +48,28 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private void updateRoomList() {
-        mListRoom = new ArrayList<>();
 
-        for(int i = 0; i < 16; i++) {
-            mListRoom.add(new room("Room " + i, "test", "test", "test"));
-        }
-
-        AdapterRooms mAdapterRooms = new AdapterRooms(this, mListRoom);
-        recyclerViewRooms.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerViewRooms.setAdapter(mAdapterRooms);
-        //ViewCompat.setNestedScrollingEnabled(recyclerViewRooms, false);
+    private void loadFragment(Fragment fragment, int fragmentContainerID) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(fragmentContainerID, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize bottom navigation bar
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        recyclerViewRooms = findViewById(R.id.recycle_view_room);
+        // Initialize fragments in toolbar frame and main frame
+        loadFragment(new fragment_all_rooms(),R.id.fragment_container_main);
+
     }
 
 }

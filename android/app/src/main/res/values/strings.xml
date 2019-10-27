@@ -20,4 +20,9 @@
     <string name="button_login_info">Already have an account? Login</string>
     <string name="text_view_sign_up_info">In order to use this app, you need to \n sign up. Fill out the form below.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="front_screen_status_text_on">System is ON</string>
+    <string name="front_screen_status_text_off">system is OFF</string>
+
 </resources>
