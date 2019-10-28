@@ -1,8 +1,8 @@
 #include "FirebaseESP8266.h"
 #include <ESP8266WiFi.h>
 
-#define WIFI_SSID "wifi"
-#define WIFI_PASSWORD "password"
+#define WIFI_SSID "Petras"
+#define WIFI_PASSWORD "paukstytes"
 #define FIREBASE_HOST "home-security-p3.firebaseio.com"
 #define FIREBASE_AUTH "9kCJL1uJ2h8avxoD5uJniT7yb4ANp9ttM4uX0Xj8"
 
@@ -15,10 +15,16 @@ int ledPin = 5;
 
 void setup() {
   Serial.begin(9600);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   
   pinMode(sensorPin, INPUT); // set input on pin 16
   pinMode(ledPin, OUTPUT); // set output on pin 5
+
+  connectToWifi();
+
+}
+void connectToWifi()
+{
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   
   Serial.print("Connecting to Wi-Fi");
   while (WiFi.status() != WL_CONNECTED)
@@ -40,8 +46,12 @@ void setup() {
   //Size and its write timeout e.g. tiny (1s), small (10s), medium (30s) and large (60s).
   Firebase.setwriteSizeLimit(firebaseData, "tiny");
 }
-
 void loop(){
+  if (WiFi.status() != WL_CONNECTED)
+{
+  Serial.println("Lost connection to WiFi..");
+  setup();
+}
   sensorValue = digitalRead(sensorPin);  // read sensor value
 
   String path = "/motion-sensor"; // database folder
@@ -67,5 +77,5 @@ void loop(){
     }
   }
 
-  delay(60*1000); // sleep for 60sec
+  //delay(60*1000); // sleep for 60sec
 }
