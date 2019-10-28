@@ -1,12 +1,12 @@
 package dk.boonga.homesecurityp3;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +32,13 @@ public class fragment_all_rooms extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+
 
     private RecyclerView recycle_view_room;
+
+    //Test of recycleview
+    private List<room> mListRoom = new ArrayList<>();
+
 
 
 
@@ -67,46 +71,25 @@ public class fragment_all_rooms extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_all_rooms, container, false);
-        recycle_view_room = v.findViewById(R.id.recycle_view_room);
-
-
-        //Test of recycleview
-        List<room> mListRoom = new ArrayList<>();
+        recycle_view_room = v.findViewById(R.id.recycle_view_room_id);
 
         for(int i = 0; i < 16; i++) {
             mListRoom.add(new room("Room " + i, "test", "test", "test"));
         }
 
         AdapterRooms mAdapterRooms = new AdapterRooms(getContext(), mListRoom);
-        recycle_view_room.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL,false));
+        recycle_view_room.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recycle_view_room.setAdapter(mAdapterRooms);
 
 
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**

@@ -71,7 +71,7 @@
             app:layout_constraintTop_toTopOf="@id/card_sensor_id"
             app:layout_constraintEnd_toEndOf="@id/card_sensor_id"
             app:srcCompat="@drawable/button_power"
-            android:visibility="invisible"
+            android:visibility="visible"
             />
 
 
