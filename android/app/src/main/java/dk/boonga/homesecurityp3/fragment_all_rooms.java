@@ -1,5 +1,6 @@
 package dk.boonga.homesecurityp3;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,15 +33,11 @@ public class fragment_all_rooms extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    private OnFragmentInteractionListener mListener;
 
     private RecyclerView recycle_view_room;
-
     //Test of recycleview
     private List<room> mListRoom = new ArrayList<>();
-
-
-
 
     public fragment_all_rooms() {
         // Required empty public constructor
@@ -80,12 +77,26 @@ public class fragment_all_rooms extends Fragment {
         AdapterRooms mAdapterRooms = new AdapterRooms(getContext(), mListRoom);
         recycle_view_room.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recycle_view_room.setAdapter(mAdapterRooms);
-
-
         return v;
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
 
     @Override
     public void onDetach() {
