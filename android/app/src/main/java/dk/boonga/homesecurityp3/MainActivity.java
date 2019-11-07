@@ -8,10 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity implements fragment_all_rooms.OnFragmentInteractionListener,
                 fragment_sensor.OnFragmentInteractionListener, fragment_front_page.OnFragmentInteractionListener,
-                fragment_sensors.OnFragmentInteractionListener{
+                fragment_sensors.OnFragmentInteractionListener, fragment_settings.OnFragmentInteractionListener{
     private static final String TAG = "MainScreenActivity";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -21,17 +23,17 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_main:
+                    fragment = new fragment_front_page();
+                    loadFragment(fragment, R.id.fragment_container_main);
+                    return true;
+                case R.id.navigation_rooms:
                     fragment = new fragment_all_rooms();
-                    loadFragment(fragment,R.id.fragment_container_main);
+                    loadFragment(fragment, R.id.fragment_container_main);
                     return true;
                 case R.id.navigation_settings:
-//                    fragment = new fragment_settings();
-//                    loadFragment(fragment,R.id.fragment_container_main);
-                    return true;
-                case R.id.navigation_profile:
-//                    fragment = new fragment_settings();
-//                    loadFragment(fragment,R.id.fragment_container_main);
+                    fragment = new fragment_settings();
+                    loadFragment(fragment,R.id.fragment_container_main);
                     return true;
             }
             return false;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         // Initialize bottom navigation bar

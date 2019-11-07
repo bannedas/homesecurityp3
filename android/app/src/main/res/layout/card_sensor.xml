@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<dk.boonga.homesecurityp3.SquareRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/elementRootView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="228dp"
     android:layout_marginStart="4dp"
     android:layout_marginTop="4dp"
     android:layout_marginEnd="4dp"
@@ -23,16 +16,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        <ImageView-->
+<!--            android:id="@+id/card_Event_Photo_Id"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@color/onyx" />-->
+
         <ImageView
             android:id="@+id/card_sensor_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/fui_bgFacebook" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@color/ash_grey" />
 
         <TextView
             android:id="@+id/card_sensor_text_id"
@@ -47,8 +52,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/card_sensor_id"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="ROOM NUMBER" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/card_lock_id"
@@ -66,17 +70,14 @@
 
         <ImageView
             android:id="@+id/card_power_id"
-            android:layout_width="124dp"
-            android:layout_height="124dp"
-            app:layout_constraintTop_toTopOf="@id/card_sensor_id"
-            app:layout_constraintEnd_toEndOf="@id/card_sensor_id"
-            app:srcCompat="@drawable/button_power"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:visibility="visible"
-            />
+            app:layout_constraintEnd_toEndOf="@id/card_sensor_id"
+            app:layout_constraintTop_toTopOf="@id/card_sensor_id"
+            app:srcCompat="@drawable/button_power" />
 
 
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
-
-</dk.boonga.homesecurityp3.SquareRelativeLayout>

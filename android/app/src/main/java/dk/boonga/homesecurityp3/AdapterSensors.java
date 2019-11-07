@@ -35,7 +35,7 @@ public class AdapterSensors extends RecyclerView.Adapter<AdapterSensors.myViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final myViewHolder holder, final int position) {
-        //holder.sensor_id.setText(mData.get(position).getmTitle());
+        holder.sensor_name.setText(mData.get(position).getmTitle());
 
         // ------------------------------ on click for adapter ------------------------------
         holder.lock_id.setOnClickListener(new View.OnClickListener() {
@@ -58,11 +58,13 @@ public class AdapterSensors extends RecyclerView.Adapter<AdapterSensors.myViewHo
 
     public class myViewHolder extends RecyclerView.ViewHolder {
 
+        TextView sensor_name;
         ImageView sensor_id;
         ImageView lock_id;
 
         public myViewHolder(View itemView) {
             super(itemView);
+            sensor_name = itemView.findViewById(R.id.card_sensor_text_id);
             sensor_id = itemView.findViewById(R.id.card_sensor_id);
             lock_id = itemView.findViewById(R.id.card_lock_id);
 

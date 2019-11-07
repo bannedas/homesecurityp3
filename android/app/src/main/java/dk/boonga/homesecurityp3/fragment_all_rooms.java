@@ -3,6 +3,7 @@ package dk.boonga.homesecurityp3;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class fragment_all_rooms extends Fragment {
@@ -70,11 +73,30 @@ public class fragment_all_rooms extends Fragment {
         View v = inflater.inflate(R.layout.fragment_all_rooms, container, false);
         recycle_view_room = v.findViewById(R.id.recycle_view_room_id);
 
-        for(int i = 0; i < 16; i++) {
-            mListRoom.add(new room("Room " + i, "test", "test", "test"));
+        final String[] arr={"Living", "Bedroom", "Bathroom", "Kitchen", "Class"};
+        final Random r = new Random();
+
+        for(int i = 0; i < 3; i++) {
+            int randomNumber = r.nextInt(arr.length);
+            mListRoom.add(new room(arr[randomNumber], "test", "test", "test"));
         }
 
-        AdapterRooms mAdapterRooms = new AdapterRooms(getContext(), mListRoom);
+        final AdapterRooms mAdapterRooms = new AdapterRooms(getContext(), mListRoom);
+
+        /** Add rooms dynamically */
+        FloatingActionButton btn = v.findViewById(R.id.recycle_view_add_room);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int randomNumber = r.nextInt(arr.length);
+                mListRoom.add(new room(arr[randomNumber], "test", "test", "test"));
+                mAdapterRooms.notifyDataSetChanged();
+
+            }
+        };
+        btn.setOnClickListener(listener);
+        /** end rooms */
+
         recycle_view_room.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recycle_view_room.setAdapter(mAdapterRooms);
         return v;

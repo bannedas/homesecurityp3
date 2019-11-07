@@ -4,27 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.plus.PlusOneButton;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-
-public class fragment_sensors extends Fragment {
-
-    private static final String TAG = "fragment_sensors";
-    private FirebaseAuth mAuth;
-
+/**
+ * A fragment with a Google +1 button.
+ * Activities that contain this fragment must implement the
+ * {@link fragment_settings.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link fragment_settings#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class fragment_settings extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,15 +30,12 @@ public class fragment_sensors extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private RecyclerView recycle_view_room;
-    private List<sensor> mListSensor = new ArrayList<>();
-
-    public fragment_sensors() {
+    public fragment_settings() {
         // Required empty public constructor
     }
 
-    public static fragment_sensors newInstance(String param1, String param2) {
-        fragment_sensors fragment = new fragment_sensors();
+    public static fragment_settings newInstance(String param1, String param2) {
+        fragment_settings fragment = new fragment_settings();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,24 +55,17 @@ public class fragment_sensors extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        mAuth = FirebaseAuth.getInstance();
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_sensors, container, false);
-        recycle_view_room = v.findViewById(R.id.recycle_view_sensors);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        String[] arr={"Camera", "Motion", "Door", "Window", "Smoke"};
-        Random r = new Random();
+        return view;
+    }
 
-        for(int i = 0; i < 4; i++) {
-            int randomNumber = r.nextInt(arr.length);
-            mListSensor.add(new sensor(arr[randomNumber], "test", "test", "test"));
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        AdapterSensors mAdapterSensors = new AdapterSensors(getContext(), mListSensor);
-        recycle_view_room.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false));
-        recycle_view_room.setAdapter(mAdapterSensors);
-        return v;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,6 +89,7 @@ public class fragment_sensors extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        mListener = null;
     }
 
     /**
@@ -121,4 +106,5 @@ public class fragment_sensors extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
