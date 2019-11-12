@@ -2,7 +2,7 @@ package dk.boonga.homesecurityp3;
 
 public class room {
 
-    private String mTitle, mLocation, mSensorType, mPhoto;
+    private String mTitle, mPhoto;
 
     public room(){
 
@@ -12,10 +12,8 @@ public class room {
         this.mPhoto = mPhoto;
     }
 
-    public room(String mTitle, String mLocation, String mDistance, String mPhoto) {
+    public room(String mTitle, String mPhoto) {
         this.mTitle = mTitle;
-        this.mLocation = mLocation;
-        this.mSensorType = mSensorType;
         this.mPhoto = mPhoto;
     }
 
@@ -25,22 +23,6 @@ public class room {
 
     public void setmTitle(String mTitle) {
         this.mTitle = mTitle;
-    }
-
-    public String getmLocation() {
-        return mLocation;
-    }
-
-    public void setmLocation(String mLocation) {
-        this.mLocation = mLocation;
-    }
-
-    public String getmSensorType() {
-        return mSensorType;
-    }
-
-    public void setmSensorType(String mDistance) {
-        this.mSensorType = mSensorType;
     }
 
     public String getmPhoto() {

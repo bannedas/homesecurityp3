@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -54,12 +57,14 @@ public class AdapterRooms extends RecyclerView.Adapter<AdapterRooms.myViewHolder
         holder.house_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("aaa", "clicked:" + mData.get(position).getmTitle());
-
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 Fragment myFragment = new fragment_sensors();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_main, myFragment).addToBackStack(null).commit();
+                //pack roomid to use later in other fragments
+                Bundle bundle = new Bundle();
+                bundle.putString("roomID", mData.get(position).getmTitle());
+                myFragment.setArguments(bundle);
 
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_main, myFragment).addToBackStack(null).commit();
             }
         });
     }
