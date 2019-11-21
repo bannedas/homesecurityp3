@@ -3,7 +3,6 @@ package dk.boonga.homesecurityp3;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -18,9 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,9 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity implements fragment_all_rooms.OnFragmentInteractionListener,
-                fragment_sensor.OnFragmentInteractionListener, fragment_front_page.OnFragmentInteractionListener,
-                fragment_sensors.OnFragmentInteractionListener, fragment_settings.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements AllRoomsFragment.OnFragmentInteractionListener,
+                UniqueSensorFragment.OnFragmentInteractionListener, FrontPageFragment.OnFragmentInteractionListener,
+                SensorsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener{
     private static final String TAG = "MainScreenActivity";
 
     private final static String APP_PACKAGE = "dk.boonga.homesecurityp3";
@@ -48,15 +44,15 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_main:
-                    fragment = new fragment_front_page();
+                    fragment = new FrontPageFragment();
                     loadFragment(fragment, R.id.fragment_container_main);
                     return true;
                 case R.id.navigation_rooms:
-                    fragment = new fragment_all_rooms();
+                    fragment = new AllRoomsFragment();
                     loadFragment(fragment, R.id.fragment_container_main);
                     return true;
                 case R.id.navigation_settings:
-                    fragment = new fragment_settings();
+                    fragment = new SettingsFragment();
                     loadFragment(fragment,R.id.fragment_container_main);
                     return true;
             }
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         // Initialize fragments in toolbar frame and main frame
-        loadFragment(new fragment_front_page(),R.id.fragment_container_main);
+        loadFragment(new FrontPageFragment(),R.id.fragment_container_main);
 
         // ---------------- notifications ----------------------
 
@@ -94,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
 
         // Initialize Database
         mPostReference = FirebaseDatabase.getInstance().getReference()
-                .child("motion-sensor");
+                .child("motion-Sensor");
 
     }
 
@@ -108,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                boolean connected = dataSnapshot.getValue(Boolean.class);
-
-                if(connected) {
-                    popUpNotification("ALERT", "Motion sensor detected movement");
-                } else {
-                    popUpNotification("CALM DOWN", "Movement stopped");
-                }
+//                boolean connected = dataSnapshot.getValue(Boolean.class);
+//
+//                if(connected) {
+//                    popUpNotification("ALERT", "Motion Sensor detected movement");
+//                } else {
+//                    popUpNotification("CALM DOWN", "Movement stopped");
+//                }
             }
 
             @Override
@@ -140,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements fragment_all_room
             notificationManager.createNotificationChannel(channel);
         }
     }
-
     @Override
     public void onFragmentInteraction(Uri uri) {
     }

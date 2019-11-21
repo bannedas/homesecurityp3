@@ -16,10 +16,10 @@ import java.util.List;
 public class AdapterSensors extends RecyclerView.Adapter<AdapterSensors.myViewHolder> {
 
     Context mContext;
-    List<sensor> mData;
+    List<Sensor> mData;
     private static final String TAG = "adapter_sensor_cards";
 
-    public AdapterSensors(Context mContext, List<sensor> mData) {
+    public AdapterSensors(Context mContext, List<Sensor> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -44,7 +44,7 @@ public class AdapterSensors extends RecyclerView.Adapter<AdapterSensors.myViewHo
                 Log.e("aaa", "Sensor clicked:" + mData.get(position).getmTitle());
 
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                Fragment myFragment = new fragment_sensor();
+                Fragment myFragment = new UniqueSensorFragment();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_main, myFragment).addToBackStack(null).commit();
 
             }

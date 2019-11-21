@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment_front_page">
+    tools:context=".FrontPageFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,23 +13,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/buttonTestId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.077" />
+
         <TextView
             android:id="@+id/front_screen_status_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
             android:text="@string/front_screen_status_text_on"
             android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@id/toggleButton_front"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/recycle_view_favorites"/>
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toggleButtonOnOffId" />
 
         <ToggleButton
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="128dp"
-            android:id="@+id/toggleButton_front"
+            android:id="@+id/toggleButtonOnOffId"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:background="@drawable/button_power"
@@ -37,12 +51,6 @@
             android:textOff=""
             android:textOn="" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_view_favorites"
-            app:layout_constraintTop_toBottomOf="@id/front_screen_status_text_id"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

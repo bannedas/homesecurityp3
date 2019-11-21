@@ -1,18 +1,18 @@
 package dk.boonga.homesecurityp3;
 
-public class room {
+public class Sensor {
 
     private String mTitle, mPhoto;
 
-    public room(){
+    public Sensor(){
 
     } // needed for firebase
 
-    public room(String mPhoto) {
+    public Sensor(String mPhoto) {
         this.mPhoto = mPhoto;
     }
 
-    public room(String mTitle, String mPhoto) {
+    public Sensor(String mTitle, String mPhoto) {
         this.mTitle = mTitle;
         this.mPhoto = mPhoto;
     }

@@ -1,41 +1,26 @@
 package dk.boonga.homesecurityp3;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.util.List;
 
 public class AdapterRooms extends RecyclerView.Adapter<AdapterRooms.myViewHolder> {
 
     Context mContext;
-    List<room> mData;
+    List<Room> mData;
     private static final String TAG = "adapter_event_cards";
 
-    public AdapterRooms(Context mContext, List<room> mData) {
+    public AdapterRooms(Context mContext, List<Room> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -58,7 +43,7 @@ public class AdapterRooms extends RecyclerView.Adapter<AdapterRooms.myViewHolder
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                Fragment myFragment = new fragment_sensors();
+                Fragment myFragment = new SensorsFragment();
                 //pack roomid to use later in other fragments
                 Bundle bundle = new Bundle();
                 bundle.putString("roomID", mData.get(position).getmTitle());

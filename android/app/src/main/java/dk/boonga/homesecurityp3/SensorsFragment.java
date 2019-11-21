@@ -1,13 +1,8 @@
 package dk.boonga.homesecurityp3;
 
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,13 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +32,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 
-public class fragment_sensors extends Fragment {
+public class SensorsFragment extends Fragment {
 
-    private static final String TAG = "fragment_sensors";
+    private static final String TAG = "SensorsFragment";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +50,7 @@ public class fragment_sensors extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recycle_view_sensor;
-    private List<sensor> mListSensor = new ArrayList<>();
+    private List<Sensor> mListSensor = new ArrayList<>();
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -72,12 +62,12 @@ public class fragment_sensors extends Fragment {
     private final static String APP_PACKAGE = "dk.boonga.homesecurityp3";
     private final static String SENSOR_CHANEL_ID = APP_PACKAGE + ".SENSOR_CHANNEL";
 
-    public fragment_sensors() {
+    public SensorsFragment() {
         // Required empty public constructor
     }
 
-    public static fragment_sensors newInstance(String param1, String param2) {
-        fragment_sensors fragment = new fragment_sensors();
+    public static SensorsFragment newInstance(String param1, String param2) {
+        SensorsFragment fragment = new SensorsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -125,11 +115,11 @@ public class fragment_sensors extends Fragment {
             public void onClick(View v) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Add sensor");
+                builder.setTitle("Add Sensor");
 
-                // Set up the input
+                // Set up the mInput
                 final EditText input = new EditText(getContext());
-                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                // Specify the type of mInput expected; this, for example, sets the mInput as a password, and will mask the text
                 input.setInputType(InputType.TYPE_CLASS_TEXT);
                 builder.setView(input);
 
@@ -198,12 +188,12 @@ public class fragment_sensors extends Fragment {
     }
 
     private void updateSensorList() {
-        DocumentReference docRef = db.collection("user-room")
+        DocumentReference docRef = db.collection("user-Room")
                 .document(mUserID)
                 .collection("rooms")
-                .document("room-list")
+                .document("Room-list")
                 .collection(mRoomID)
-                .document("sensor-list");
+                .document("Sensor-list");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -214,7 +204,7 @@ public class fragment_sensors extends Fragment {
                     if (document.exists()) {
                         Map<String, Object> map = document.getData();
                         for (Map.Entry<String, Object> entry : map.entrySet()) {
-                            mListSensor.add(new sensor(entry.getKey(), "photo-url-goes-here"));
+                            mListSensor.add(new Sensor(entry.getKey(), "photo-url-goes-here"));
                         }
                     }
 
@@ -232,12 +222,12 @@ public class fragment_sensors extends Fragment {
         data.put(sensorID, true);
 
         DocumentReference docRef =
-                db.collection("user-room")          // first folder user-room
+                db.collection("user-Room")          // first folder user-Room
                         .document(UID)                           // second folder userID
-                        .collection("rooms")  // third folder room-id
-                        .document("room-list")
+                        .collection("rooms")  // third folder Room-id
+                        .document("Room-list")
                         .collection(roomID)
-                        .document("sensor-list");
+                        .document("Sensor-list");
 
         docRef.set(data, SetOptions.merge());
     }

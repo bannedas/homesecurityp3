@@ -26,7 +26,7 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "SignUpActivity";
-    EditText signUpEditTextEmail, signUpEditTextPassword, signUpEditTextConfirmPassword, signUpEditFirstName, singUpEditLastName;
+    EditText mSignUpEditTextEmail, mSignUpEditTextPassword, mSignUpEditTextConfirmPassword, mSignUpEditFirstName, mSignUpEditLastName, mSignUpEditTextPin;
     Button buttonLogin;
     //ProgressBar signUpProgressBar;
 
@@ -44,11 +44,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //assign db to our instance
         db = FirebaseFirestore.getInstance();
 
-        signUpEditTextEmail = findViewById(R.id.text_view_sign_up_email_input);
-        signUpEditTextPassword = findViewById(R.id.text_view_sign_up_password_input);
-        signUpEditTextConfirmPassword = findViewById(R.id.text_view_sign_up_password_confirm_input);
-        signUpEditFirstName = findViewById(R.id.text_view_sign_up_name_input);
-        singUpEditLastName = findViewById(R.id.text_view_sign_up_input_last_name);
+        mSignUpEditTextEmail = findViewById(R.id.editTextViewSignUpEmailId);
+        mSignUpEditTextPassword = findViewById(R.id.editTextViewSignUpPasswordId);
+        mSignUpEditTextConfirmPassword = findViewById(R.id.editTextViewSignUpPasswordConfirmId);
+        mSignUpEditFirstName = findViewById(R.id.editTextViewSignUpFirstNameId);
+        mSignUpEditLastName = findViewById(R.id.editTextViewSignUpLastNameId);
+        mSignUpEditTextPin = findViewById(R.id.editTextViewSignUpPinId);
 
         buttonLogin = findViewById(R.id.buttonSignUpLoginId);
         buttonLogin.setOnClickListener(this);
@@ -61,24 +62,29 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         /*
         This gets the text written by the user in the EditTextFields email and password.
          */
-        String email = signUpEditTextEmail.getText().toString().trim();
-        String password = signUpEditTextPassword.getText().toString().trim();
-        final String firstName = signUpEditFirstName.getText().toString().trim();
-        final String lastName = singUpEditLastName.getText().toString().trim();
-        String confirmPassword = signUpEditTextConfirmPassword.getText().toString().trim();
+        String email = mSignUpEditTextEmail.getText().toString().trim();
+        String password = mSignUpEditTextPassword.getText().toString().trim();
+        final String firstName = mSignUpEditFirstName.getText().toString().trim();
+        final String lastName = mSignUpEditLastName.getText().toString().trim();
+        String confirmPassword = mSignUpEditTextConfirmPassword.getText().toString().trim();
+        final String pin = mSignUpEditTextPin.getText().toString().trim();
 
         // If the Email EditTextField is empty show an error and point where the error is by using .requestFocus
         if (email.isEmpty()) {
-            signUpEditTextEmail.setError("Email is required");
-            signUpEditTextEmail.requestFocus();
+            mSignUpEditTextEmail.setError("Email is required");
+            mSignUpEditTextEmail.requestFocus();
             return;
         } else if (firstName.isEmpty()) {
-            signUpEditFirstName.setError("First name is required");
-            signUpEditFirstName.requestFocus();
+            mSignUpEditFirstName.setError("First name is required");
+            mSignUpEditFirstName.requestFocus();
             return;
         } else if (lastName.isEmpty()) {
-            singUpEditLastName.setError("Last name is required");
-            singUpEditLastName.requestFocus();
+            mSignUpEditLastName.setError("Last name is required");
+            mSignUpEditLastName.requestFocus();
+            return;
+        } else if (pin.isEmpty()) {
+            mSignUpEditLastName.setError("PIN is required");
+            mSignUpEditLastName.requestFocus();
             return;
         }
         /*
@@ -86,25 +92,25 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
          show an error and point where the error is by using .requestFocus
          */
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            signUpEditTextEmail.setError("Please enter a valid email");
-            signUpEditTextEmail.requestFocus();
+            mSignUpEditTextEmail.setError("Please enter a valid email");
+            mSignUpEditTextEmail.requestFocus();
             return;
         }
         // If the Password EditTextField is empty show an error and point where the error is by using .requestFocus
         if(password.isEmpty()) {
-            signUpEditTextPassword.setError("Password is required");
-            signUpEditTextPassword.requestFocus();
+            mSignUpEditTextPassword.setError("Password is required");
+            mSignUpEditTextPassword.requestFocus();
             return;
         }
         // If the Password EditTextField is not long enough, show an error and point where the error is by using .requestFocus
         if(password.length() < 6) {
-            signUpEditTextPassword.setError("Minimum length of password should be 6");
-            signUpEditTextPassword.requestFocus();
+            mSignUpEditTextPassword.setError("Minimum length of password should be 6");
+            mSignUpEditTextPassword.requestFocus();
             return;
         }
         if (!password.equals(confirmPassword)) {
-            signUpEditTextPassword.setError(getString(Integer.parseInt("Passwords do not match")));
-            signUpEditTextPassword.requestFocus();
+            mSignUpEditTextPassword.setError(getString(Integer.parseInt("Passwords do not match")));
+            mSignUpEditTextPassword.requestFocus();
         }
 
         /*
@@ -126,6 +132,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             Map<String, Object> dbUser = new HashMap<>();
                             dbUser.put("first_name", firstName);
                             dbUser.put("last_name", lastName);
+                            dbUser.put("PIN", pin);
 
                             // Add a new document with a generated ID
                             db.collection("users").document(UID).set(dbUser).addOnSuccessListener(new OnSuccessListener<Void>() {

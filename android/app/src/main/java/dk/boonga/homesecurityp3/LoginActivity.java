@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     EditText mLoginEditTextEmail, mLoginEditTextPassword;
     TextView mSignUpTextView;
+    FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.buttonLoginId).setOnClickListener(this);
 
         printHashKey(getApplicationContext());
+
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public  void  onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null){
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mAuthListener);
+
     }
     public static void printHashKey(Context context) {
         try {

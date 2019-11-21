@@ -98,5 +98,6 @@
     <!--Create event activity-->
     <string name="text_view_create_event_upload_en">Upload event image</string>
     <string name="text_view_create_event_upload_da">Opret din fest</string>
+    <string name="edit_text_view_signup_pin">PIN</string>
 
 </resources>
