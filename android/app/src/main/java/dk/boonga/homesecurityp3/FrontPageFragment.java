@@ -37,6 +37,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static android.text.InputType.TYPE_CLASS_TEXT;
 
 
 /**
@@ -54,14 +58,13 @@ public class FrontPageFragment extends Fragment implements View.OnClickListener 
     private static final String ARG_PARAM2 = "param2";
 
     private static final String TAG = "FrontPageFragment";
-    Button mButtonTest;
-    ToggleButton mToggleOnOffButton;
     String UID;
+    public String pinDocument;
+    public EditText mEditTextPin;
 
     private FirebaseAuth mAuth;
     //init firestore database sdk
     FirebaseFirestore db;
-    private static ArrayList<Type> mArrayList = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -167,40 +170,49 @@ public class FrontPageFragment extends Fragment implements View.OnClickListener 
 
     public void popUpEditText() {
         AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-        final EditText mEditTextPin = new EditText(getContext());
+        mEditTextPin = new EditText(getContext());
+        mEditTextPin.setInputType(TYPE_CLASS_TEXT);
         alert.setMessage("Enter your PIN to turn ON/OFF the system");
         alert.setTitle("PIN");
 
         alert.setView(mEditTextPin);
 
-//        FirebaseUser fireUser = mAuth.getCurrentUser(); //get user info
-//        final String UID = fireUser.getUid(); //store user id
         alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
 
-            public void onClick(DialogInterface dialog, int whichButton) {
+            public void onClick(DialogInterface dialog, int which) {
                 if (FirebaseAuth.getInstance().getCurrentUser() == null) {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
-
                     mAuth.signOut();
                 }
                 else{
                     UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                      CAN SOMEONE TRY TO FIX THIS FUCKING SHIT
-//                    Log.d(TAG, "" + db.collection("users").document(UID).get().getResult().getData());
 
-
+                    db.collection("users").document(UID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                 pinDocument = task.getResult().getString("PIN");
+                                assert pinDocument != null;
+                                Log.d(TAG, "" + pinDocument + " " + mEditTextPin.getText());
+                            }
+                        }});
                 }
-                Editable mEdit = mEditTextPin.getText();
 
-                //DOES NOT WORK PROPERLY... I CANT GET IT TO WORK
-                if (mEdit.equals(db.collection("users").document(UID).collection("PIN").get().toString())) {
+                if (Objects.equals(mEditTextPin.getText().toString(), pinDocument)) {
                     Toast.makeText(getContext(), "System turned ON/OFF", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(getContext(), "PIN is wrong", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
             }
         });
 

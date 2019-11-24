@@ -193,12 +193,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
             case R.id.buttonDeleteAccountId:
                 Log.d(TAG, "Delete Account clicked");
+                    mAuth = FirebaseAuth.getInstance();
                 if (mAuth.getCurrentUser() != null) {
+
                     Log.d(TAG, "LOGGED IN");
 
                     FirebaseUser fireUser = mAuth.getCurrentUser();
                     assert fireUser != null;
                     final String UID = fireUser.getUid();
+                    Log.d(TAG, ""+ UID);
                     dataBase.collection("users").document(UID).delete();
 
                             mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
