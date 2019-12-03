@@ -196,16 +196,19 @@ public class FrontPageFragment extends Fragment implements View.OnClickListener 
                                  pinDocument = task.getResult().getString("PIN");
                                 assert pinDocument != null;
                                 Log.d(TAG, "" + pinDocument + " " + mEditTextPin.getText());
+
+
+                                if (Objects.equals(mEditTextPin.getText().toString(), pinDocument)) {
+                                    Toast.makeText(getContext(), "System turned ON/OFF", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getContext(), "PIN is wrong", Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, mEditTextPin.getText().toString() + " " + pinDocument);
+                                }
                             }
                         }});
                 }
 
-                if (Objects.equals(mEditTextPin.getText().toString(), pinDocument)) {
-                    Toast.makeText(getContext(), "System turned ON/OFF", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getContext(), "PIN is wrong", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
