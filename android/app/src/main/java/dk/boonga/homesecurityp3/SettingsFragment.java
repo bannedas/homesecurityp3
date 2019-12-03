@@ -46,7 +46,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     FirebaseAuth mAuth;
     FirebaseFirestore dataBase;
 
-    Button mButtonTest;
+
     Button mbuttonSignOut;
     Button mbuttonChangePassword;
     Button mButtonDeleteAccount;
@@ -82,6 +82,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         mAuth = FirebaseAuth.getInstance();
+        dataBase = FirebaseFirestore.getInstance();
+        mAuth.getCurrentUser();
     }
 
     @Override
@@ -201,7 +203,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                     FirebaseUser fireUser = mAuth.getCurrentUser();
                     assert fireUser != null;
                     final String UID = fireUser.getUid();
-                    Log.d(TAG, ""+ UID);
+                    Log.d(TAG, "msg 1: "+ dataBase.collection("users").document(UID));
+                    Log.d(TAG, "msg 2: " + fireUser.getUid());
                     dataBase.collection("users").document(UID).delete();
 
                             mAuth.getCurrentUser().delete().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -214,6 +217,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                                                 "Your account has been deleted and you have been logged out.", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getContext(), LoginActivity.class);
                                         startActivity(intent);
+                                    }
+                                   else {
+
+                                       Log.d(TAG, "Failed");
                                     }
 
                                 }
