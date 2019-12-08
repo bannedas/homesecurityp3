@@ -10,30 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/sensor_screen_status_text_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/front_screen_status_text_on"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sensor_text_name_id"
-            android:layout_marginTop="32dp"
-            />
-
         <ToggleButton
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sensor_screen_status_text_id"
             android:id="@+id/toggleButton_sensor"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:background="@drawable/button_power"
             android:text=""
             android:textOff=""
-            android:textOn="" />
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sensor_text_name_id" />
 
         <ImageButton
             android:id="@+id/imageButton_back_id"
@@ -47,7 +35,9 @@
             android:id="@+id/sensor_text_name_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="SENSOR NAME"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sensor_container_id" />
@@ -57,7 +47,15 @@
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:background="@color/ash_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageButton_back_id">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/sensor" />
 
         </FrameLayout>
 

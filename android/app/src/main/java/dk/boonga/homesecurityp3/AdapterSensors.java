@@ -1,6 +1,7 @@
 package dk.boonga.homesecurityp3;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -41,10 +42,12 @@ public class AdapterSensors extends RecyclerView.Adapter<AdapterSensors.myViewHo
         holder.lock_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("aaa", "Sensor clicked:" + mData.get(position).getmTitle());
-
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 Fragment myFragment = new UniqueSensorFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("sensorID", mData.get(position).getmTitle());
+                myFragment.setArguments(bundle);
+
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_main, myFragment).addToBackStack(null).commit();
 
             }
