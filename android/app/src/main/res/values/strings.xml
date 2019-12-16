@@ -99,5 +99,7 @@
     <string name="text_view_create_event_upload_en">Upload event image</string>
     <string name="text_view_create_event_upload_da">Opret din fest</string>
     <string name="edit_text_view_signup_pin">PIN</string>
+    <string name="text_view_add_room_help_text">Click the + button in the bottom right corner to add a room</string>
+    <string name="text_view_add_sensor_help_text">Click the + button in the right bottom corner to add a new sensor</string>
 
 </resources>

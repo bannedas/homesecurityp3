@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +49,7 @@ public class AllRoomsFragment extends Fragment {
 
     private RecyclerView recycle_view_room;
     private List<Room> mListRoom = new ArrayList<>();
+    private TextView addRoomHelpText;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -98,6 +100,8 @@ public class AllRoomsFragment extends Fragment {
         recycle_view_room = v.findViewById(R.id.recycle_view_room_id);
 
         updateRoomList(); // load all user rooms from firebase
+        addRoomHelpText = v.findViewById(R.id.helpTextAddRoomId);
+
 
         /** Add rooms dynamically */
         FloatingActionButton btn = v.findViewById(R.id.recycle_view_add_room);
@@ -134,6 +138,8 @@ public class AllRoomsFragment extends Fragment {
             }
         };
         btn.setOnClickListener(listener);
+
+
         /** end rooms */
 
         return v;
@@ -198,6 +204,11 @@ public class AllRoomsFragment extends Fragment {
                     AdapterRooms mAdapterRooms = new AdapterRooms(getContext(), mListRoom);
                     recycle_view_room.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     recycle_view_room.setAdapter(mAdapterRooms);
+                }
+                if (mListRoom.isEmpty()) {
+                    addRoomHelpText.setVisibility(View.VISIBLE);
+                } else {
+                    addRoomHelpText.setVisibility(View.GONE);
                 }
             }
         });

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,6 +52,7 @@ public class SensorsFragment extends Fragment {
 
     private RecyclerView recycle_view_sensor;
     private List<Sensor> mListSensor = new ArrayList<>();
+    private  TextView addSensorHelpText;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -106,7 +108,10 @@ public class SensorsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sensors, container, false);
         recycle_view_sensor = v.findViewById(R.id.recycle_view_sensors);
 
+
         updateSensorList();
+       addSensorHelpText = v.findViewById(R.id.helpTextAddSensorId);
+
 
         /** Add sensors dynamically */
         FloatingActionButton btn = v.findViewById(R.id.recycle_view_add_sensor);
@@ -143,6 +148,7 @@ public class SensorsFragment extends Fragment {
             }
         };
         btn.setOnClickListener(listener);
+
         /** end sensors */
 
 
@@ -211,6 +217,11 @@ public class SensorsFragment extends Fragment {
                     AdapterSensors mAdapterSensors = new AdapterSensors(getContext(), mListSensor);
                     recycle_view_sensor.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.VERTICAL, false));
                     recycle_view_sensor.setAdapter(mAdapterSensors);
+                }
+                if (mListSensor.isEmpty()) {
+                    addSensorHelpText.setVisibility(View.VISIBLE);
+                } else {
+                    addSensorHelpText.setVisibility(View.GONE);
                 }
             }
         });
