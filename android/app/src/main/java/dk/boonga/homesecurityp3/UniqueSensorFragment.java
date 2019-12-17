@@ -44,6 +44,7 @@ public class UniqueSensorFragment extends Fragment {
 
     private String mSensorID = "";
     private TextView sensorID;
+    private boolean mActive;
 
     public UniqueSensorFragment() {
         // Required empty public constructor

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AllRoomsFragment.
 
         // Initialize Database
         mPostReference = FirebaseDatabase.getInstance().getReference()
-                .child("motion-Sensor");
+                .child("motion-sensor");
 
     }
 
@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements AllRoomsFragment.
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-//                boolean connected = dataSnapshot.getValue(Boolean.class);
-//
-//                if(connected) {
-//                    popUpNotification("ALERT", "Motion Sensor detected movement");
-//                } else {
-//                    popUpNotification("CALM DOWN", "Movement stopped");
-//                }
+                boolean connected = dataSnapshot.getValue(Boolean.class);
+
+                if(connected) {
+                    popUpNotification("ALERT", "Motion Sensor detected movement");
+                } else {
+                    popUpNotification("CALM DOWN", "Movement stopped");
+                }
             }
 
             @Override

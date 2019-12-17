@@ -1,0 +1,112 @@
+@startuml
+scale 1
+
+'--------------------------  LEVEL 1 --------------------------
+LoginActivity <|--|> SignUpActivity
+LoginActivity --|> MainActivity
+
+class LoginActivity {
+    -mAuth: FirebaseAuth
+    -email: string
+    -password: string
+}
+
+
+'--------------------------  LEVEL 2 --------------------------
+MainActivity <|--|> FrontPageFragment
+MainActivity <|--|> AllFroomsFragment
+MainActivity <|--|> SettingsFragment
+
+class MainActivity {
+    -mAuth: FirebaseAuth
+    -loadFramgment()
+    -createNotificationChannel()
+    -popUpNotification()
+    -BottomNavigationView()
+}
+
+class SignUpActivity {
+    -mAuth: FirebaseAuth
+    -registerUser()
+    -email: string
+    -password: string
+    -confirmPassword: string
+    -firstName: string
+    -lastName: string
+    -pin: string
+}
+
+'--------------------------  LEVEL 3 --------------------------
+
+class FrontPageFragment {
+    -mAuth: FirebaseAuth
+    -UID: string
+    -popUpEditText()
+    -onClick()
+}
+
+class AllFroomsFragment {
+    -mAuth: FirebaseAuth
+    -UID: string
+    -mRoomID: string
+    -updateRoomList()
+    -addRoom()
+}
+
+class SettingsFragment {
+    -mAuth: FirebaseAuth
+    -updatePassword()
+}
+
+'--------------------------  LEVEL 4 --------------------------
+
+SensorsFragment <|-- AdapterSensors
+AllFroomsFragment <|-- AdapterRooms
+
+AllFroomsFragment <|--|> SensorsFragment
+
+AdapterRooms <|-- Room
+AdapterSensors <|-- Sensor
+
+UniqueSensorFragment <|--|> SensorsFragment
+
+class AdapterRooms {
+    -getItemCount()
+    -onBindViewHolder()
+    -mData: List<Room>
+}
+
+class Room {
+    -mTitle: string
+    -getmTitle()
+    -setmTitle()
+}
+
+class AdapterSensors {
+    -getItemCount()
+    -onBindViewHolder()
+    -mData: List<Sensor>
+}
+
+class SensorsFragment {
+    -mAuth: FirebaseAuth
+    -db: FirebaseFirestore
+    -mListSensor: List<Sensor>
+    -mUserID: string
+    -mSensorID: string
+    -mRoomID: string
+    -updateSensorList()
+    -addSensor()
+}
+
+class Sensor {
+    -mTitle: string
+    -getmTitle()
+    -setmTitle()
+}
+
+class UniqueSensorFragment {
+    -mSensorID: string
+    -mActive: boolean
+}
+@enduml
